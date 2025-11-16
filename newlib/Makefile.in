@@ -51330,6 +51330,10 @@ install-man: libc_install-man
 
 $(libc_iconv_mkdeps_outputs): @MAINTAINER_MODE_TRUE@ $(srcdir)/libc/iconv/ces/mkdeps.pl $(srcdir)/libc/iconv/lib/encoding.deps
 	$(AM_V_GEN)cd $(srcdir)/libc/iconv/ces && ./mkdeps.pl
+@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@NASM ?= nasm
+
+@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@%.o: %.asm
+@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@	$(NASM) -f elf32 -o $@ $<
 $(LIBM_CHEWOUT_FILES): $(MKDOC)
 
 libm/libm.dvi: libm/targetdep.tex $(LIBM_CHEWOUT_FILES)

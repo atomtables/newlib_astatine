@@ -2138,6 +2138,8 @@ static mchunkptr mremap_chunk(p, new_size) mchunkptr p; size_t new_size;
   Main interface to sbrk (but see also malloc_trim).
 */
 
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
 #if __STD_C
 static void malloc_extend_top(RARG INTERNAL_SIZE_T nb)
 #else
@@ -2263,9 +2265,8 @@ static void malloc_extend_top(RARG nb) RDECL INTERNAL_SIZE_T nb;
   assert(((unsigned long)((char*)top + top_size) & (pagesz - 1)) == 0
 	 || correction_failed);
 }
-
+#pragma GCC pop_options
 #endif /* DEFINE_MALLOC */
-
 
 /* Main public routines */
 
