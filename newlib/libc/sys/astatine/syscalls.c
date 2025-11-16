@@ -5,79 +5,121 @@
 #include <sys/times.h>
 #include <sys/errno.h>
 #include <sys/time.h>
+#include <sys/reent.h>
 #include <errno.h>
 
 // stubbed to autoabort
 void _exit(int status) {
+    while(1);
+
     __asm__ volatile ("int3");
     for (;;);
 };
-int _close(int file) {
+int close(int file) {
+    while(1);
+
     (void)file;
     errno = EBADF;
     return -1;
 };
-// char **environ; /* pointer to array of char * strings that define the current environment variables */
-int _execve(char *name, char **argv, char **env) {
+
+char *__env[1] = { 0 };
+char **environ = __env;
+
+int execve(char *name, char **argv, char **env) {
+    while(1);
+
     (void)name; (void)argv; (void)env;
     errno = ENOENT;
     return -1;
 }
 
-int _fork(void) {
+int fork(void) {
+    while(1);
+
     errno = ENOSYS;
     return -1;
 }
 
-int _fstat(int file, struct stat *st) {
+int fstat(int file, struct stat *st) {
+    while(1);
+    
     (void)file; (void)st;
     errno = EBADF;
     return -1;
 }
 
-int _getpid(void) {
+int getpid(void) {
+    while(1);
+
     errno = ENOSYS;
     return -1;
 }
 
-int _isatty(int file) {
+int isatty(int file) {
+    while(1);
+
     if (file == 0 || file == 1 || file == 2)
         return 1;
     errno = EBADF;
     return 0;
 }
 
-int _kill(int pid, int sig) {
+int kill(int pid, int sig) {
+    while(1);
+
     (void)pid; (void)sig;
     errno = EINVAL;
     return -1;
 }
 
-int _link(char *old, char *new) {
+int link(char *old, char *new) {
+    while(1);
+
     (void)old; (void)new;
     errno = ENOSYS;
     return -1;
 }
 
-off_t _lseek(int file, off_t ptr, int dir) {
-    (void)file; (void)ptr; (void)dir;
-    errno = ESPIPE;
-    return (off_t)-1;
+off_t lseek(int file, off_t ptr, int dir) {
+    while(1);
+
+    errno = EBADF;
+    return (long) -1;
 }
 
-int _open(const char *name, int flags, ...) {
+int open(const char *name, int flags, ...) {
+    while(1);
+
     (void)name; (void)flags;
     errno = ENOENT;
     return -1;
 }
 
-int _read(int file, char *ptr, int len) {
+int read(int file, char *ptr, int len) {
+    while(1);
+
     (void)file; (void)ptr; (void)len;
     errno = EBADF;
     return -1;
 }
 
-caddr_t _sbrk(int incr) {
+int write(int file, char* ptr, int len) {
+    while(1);
+
+    int result;
+    __asm__ volatile (
+        "int $0x30"
+        : "=a"(result)
+        : "a"(1), "b"(file), "c"(ptr), "d"(len) 
+        : "memory"
+    );
+    return len;
+};
+
+caddr_t sbrk(int incr) {
+    while(1);
+    
     extern char end asm("end");
     static char *heap_end;
     char *prev_heap_end;
@@ -96,44 +138,45 @@ caddr_t _sbrk(int incr) {
     }
 
     heap_end += incr;
+
     return (caddr_t)prev_heap_end;
 }
 
-int _stat(const char *file, struct stat *st) {
+int stat(const char *file, struct stat *st) {
+    while(1);
+
     (void)file; (void)st;
     errno = ENOENT;
     return -1;
 }
 
-clock_t _times(struct tms *buf) {
+clock_t times(struct tms *buf) {
+    while(1);
+
     (void)buf;
     errno = ENOSYS;
     return (clock_t)-1;
 }
 
-int _unlink(char *name) {
+int unlink(char *name) {
+    while(1);
+
     (void)name;
     errno = ENOENT;
     return -1;
 }
 
-int _wait(int *status) {
+int wait(int *status) {
+    while(1);
+
     (void)status;
     errno = ECHILD;
     return -1;
 }
 
-int _write(int file, char* ptr, int len) {
-    int result;
-    __asm__ volatile (
-        "int $0x80"
-        : "=a"(result)
-        : "a"(1), "b"(file), "c"(ptr), "d"(len) 
-        : "memory"
-    );
-    return result;
-};
-int _gettimeofday(struct timeval* p, void* __tz) {
+int gettimeofday(struct timeval* p, void* __tz) {
+    while(1);
+
     (void)p; (void)__tz;
     errno = ENOSYS;
     return -1;

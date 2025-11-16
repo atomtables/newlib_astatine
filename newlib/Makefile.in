@@ -627,7 +627,7 @@ check_PROGRAMS =
 @HAVE_LIBC_SYS_TIRTOS_DIR_TRUE@am__append_62 = libc/sys/tirtos/lock.c
 @HAVE_LIBC_SYS_W65_DIR_TRUE@am__append_63 = libc/sys/w65/syscalls.c libc/sys/w65/trap.c
 @HAVE_LIBC_SYS_Z8KSIM_DIR_TRUE@am__append_64 = libc/sys/z8ksim/glue.c
-@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@@MAY_SUPPLY_SYSCALLS_TRUE@am__append_65 = libc/sys/astatine/syscalls.c
+@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@am__append_65 = libc/sys/astatine/syscalls.c
 @HAVE_LIBC_MACHINE_AARCH64_TRUE@am__append_66 = \
 @HAVE_LIBC_MACHINE_AARCH64_TRUE@	libc/machine/aarch64/memchr-stub.c \
 @HAVE_LIBC_MACHINE_AARCH64_TRUE@	libc/machine/aarch64/memchr.S \
@@ -1907,7 +1907,7 @@ am__objects_51 = libc/ssp/libc_a-chk_fail.$(OBJEXT) \
 @HAVE_LIBC_SYS_W65_DIR_TRUE@am__objects_74 = libc/sys/w65/libc_a-syscalls.$(OBJEXT) \
 @HAVE_LIBC_SYS_W65_DIR_TRUE@	libc/sys/w65/libc_a-trap.$(OBJEXT)
 @HAVE_LIBC_SYS_Z8KSIM_DIR_TRUE@am__objects_75 = libc/sys/z8ksim/libc_a-glue.$(OBJEXT)
-@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@@MAY_SUPPLY_SYSCALLS_TRUE@am__objects_76 = libc/sys/astatine/libc_a-syscalls.$(OBJEXT)
+@HAVE_LIBC_SYS_ASTATINE_DIR_TRUE@am__objects_76 = libc/sys/astatine/libc_a-syscalls.$(OBJEXT)
 @HAVE_LIBC_MACHINE_AARCH64_TRUE@am__objects_77 = libc/machine/aarch64/libc_a-memchr-stub.$(OBJEXT) \
 @HAVE_LIBC_MACHINE_AARCH64_TRUE@	libc/machine/aarch64/libc_a-memchr.$(OBJEXT) \
 @HAVE_LIBC_MACHINE_AARCH64_TRUE@	libc/machine/aarch64/libc_a-memcmp-stub.$(OBJEXT) \
