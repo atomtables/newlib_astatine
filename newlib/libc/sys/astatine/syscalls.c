@@ -75,9 +75,14 @@ int open(const char *name, int flags, ...) {
 }
 
 int read(int file, char *ptr, int len) {
-    (void)file; (void)ptr; (void)len;
-    errno = EBADF;
-    return -1;
+    int result;
+    __asm__ volatile (
+        "int $0x30"
+        : "=a"(result)
+        : "a"(2), "b"(file), "c"(ptr), "d"(len) 
+        : "memory"
+    );
+    return len;
 }
 
 int write(int file, char* ptr, int len) {
